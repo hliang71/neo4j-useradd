@@ -33,7 +33,7 @@ import org.neo4j.server.rest.repr.formats.JsonFormat;
 import org.neo4j.server.security.auth.AuthManager;
 import org.neo4j.server.security.auth.Credential;
 import org.neo4j.server.security.auth.User;
-import org.neo4j.server.security.auth.exception.IllegalUsernameException;
+import org.neo4j.server.security.auth.exception.IllegalCredentialsException;
 import org.neo4j.test.server.EntityOutputFormat;
 
 import static org.hamcrest.Matchers.containsString;
@@ -234,7 +234,7 @@ public class UserAddServiceTest
         when( req.getUserPrincipal() ).thenReturn( NEO4J_PRINCIPLE );
 
         AuthManager authManager = mock( AuthManager.class );
-        when( authManager.newUser( "foo", "bar", true ) ).thenThrow( new IllegalUsernameException("The specified user already exists") );
+        when( authManager.newUser( "foo", "bar", true ) ).thenThrow( new IllegalCredentialsException("The specified user already exists") );
 
         OutputFormat outputFormat = new EntityOutputFormat( new JsonFormat(), new URI( "http://www.example.com" ), null );
         UserAddService userAddService = new UserAddService( authManager, new JsonFormat(), outputFormat );

@@ -31,10 +31,8 @@ import org.neo4j.server.rest.repr.formats.JsonFormat;
 import org.neo4j.server.security.auth.AuthManager;
 import org.neo4j.server.security.auth.Credential;
 import org.neo4j.server.security.auth.User;
-import org.neo4j.server.security.auth.exception.IllegalUsernameException;
 import org.neo4j.test.server.EntityOutputFormat;
 
-import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;

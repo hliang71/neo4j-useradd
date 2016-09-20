@@ -30,7 +30,6 @@ import javax.ws.rs.core.Response;
 
 import org.neo4j.server.rest.repr.OutputFormat;
 import org.neo4j.server.security.auth.AuthManager;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
