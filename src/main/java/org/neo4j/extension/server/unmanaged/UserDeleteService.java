@@ -28,17 +28,12 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
-import org.neo4j.kernel.api.exceptions.Status;
 import org.neo4j.server.rest.repr.OutputFormat;
-import org.neo4j.server.rest.transactional.error.Neo4jError;
 import org.neo4j.server.security.auth.AuthManager;
-import org.neo4j.server.security.auth.User;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static javax.ws.rs.core.Response.Status.BAD_REQUEST;
-import static org.neo4j.server.rest.web.CustomStatusType.UNPROCESSABLE;
 
 /**
  * Enable users to be deleted.
