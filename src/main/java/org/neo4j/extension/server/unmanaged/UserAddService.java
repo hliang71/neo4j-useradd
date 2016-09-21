@@ -38,6 +38,8 @@ import org.neo4j.server.rest.transactional.error.Neo4jError;
 import org.neo4j.server.security.auth.AuthManager;
 import org.neo4j.server.security.auth.User;
 import org.neo4j.server.security.auth.exception.IllegalCredentialsException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static javax.ws.rs.core.Response.Status.BAD_REQUEST;
 import static org.neo4j.server.rest.web.CustomStatusType.UNPROCESSABLE;
@@ -50,6 +52,8 @@ import static org.neo4j.server.rest.web.CustomStatusType.UNPROCESSABLE;
 @Path( "/useradd" )
 public class UserAddService
 {
+    private static final Logger logger = LoggerFactory.getLogger(UserAddService.class);
+
     private final AuthManager authManager;
     private final InputFormat input;
     private final OutputFormat output;
@@ -68,9 +72,11 @@ public class UserAddService
     @Path("/{username}")
     public Response createUser( @PathParam("username") String username, @Context HttpServletRequest req, String payload )
     {
+        logger.info("here !!!!!!!!!!!!!!!!!");
         Principal principal = req.getUserPrincipal();
-        if ( principal == null || !principal.getName().equals( NEO4J_USER ) )
+        if ( principal != null && !principal.getName().equals( NEO4J_USER ) )
         {
+            logger.info("principal = " + principal);
             return output.notFound();
         }
 

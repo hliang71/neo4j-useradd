@@ -2,6 +2,32 @@ An unmanaged extension to allow the neo4j user to create additional users.
 More details are in the accompanying blog post.
 Neo4j: Graphs for Everyone
 
+
+How to build:
+mvn clean install -Dlicense.skip=true -Dlicensing.skip=true
+
+How are users managed?
+org.neo4j.server.rest.dbms.UserService provides a JAX-RS endpoint at /user to expose two AuthManager operations, a GET of an AuthorizationRepresentation of a user by passing the username on the path. The password of a user can be set by POSTing to /{username}/password – this can only be done when the requesting principal matches the username.
+
+HOW DO I ADD MORE USERS?
+That is a very good question (avoiding the obviously dirty solution of directly modifying the data/dbms/auth file). As already mentioned the UserRepository has the ability to create a User, as used by the AuthManager newUser method, but where is this exposed?
+
+Sadly the answer is that as far as I could tell it’s not at present, so is it a case of neo4j-shell & Groovy to the rescue?
+Can we write a script that can obtain the protected AuthManager from the AbstractServer – nice idea in principle, but the shell uses RMI. It’s time for an unmanaged extension.
+
+The code is available from GitHub here, in essence it adds a new REST endpoint to allow the neo4j user to creating other user accounts using a POST request to /useradd/{username} and including password=some_password within the payload.
+
+You can build the extension using Maven’s package target, and copy the resultant jar file from target/neo4j-server-useradd-2.2.1.jar to the /plugins directory of the Neo4j server.
+
+Additionally you’ll need to add the following line to conf/neo4j-server.properties:
+org.neo4j.server.thirdparty_jaxrs_classes=org.neo4j.extension.server.unmanaged=/unmanaged
+
+
+
+
+Neo4j Document:
+
+
 Neo4j is the world’s leading Graph Database. It is a high performance graph store with all the features expected of a mature and robust database, like a friendly query language and ACID transactions. The programmer works with a flexible network structure of nodes and relationships rather than static tables — yet enjoys all the benefits of enterprise-quality database. For many applications, Neo4j offers orders of magnitude performance benefits compared to relational DBs.
 
 Learn more on the Neo4j website.
