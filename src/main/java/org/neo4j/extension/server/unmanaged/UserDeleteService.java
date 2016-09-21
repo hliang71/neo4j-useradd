@@ -46,7 +46,7 @@ public class UserDeleteService
 
     private final AuthManager authManager;
     private final OutputFormat output;
-    public static final String NEO4J_USER = "neo4j";
+    public static final String NEO4J_USER = "neoAdmin";
 
     public UserDeleteService( @Context AuthManager authManager,
         @Context OutputFormat output )

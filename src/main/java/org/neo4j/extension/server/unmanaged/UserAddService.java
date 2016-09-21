@@ -57,7 +57,7 @@ public class UserAddService
     private final AuthManager authManager;
     private final InputFormat input;
     private final OutputFormat output;
-    public static final String NEO4J_USER = "neo4j";
+    public static final String NEO4J_USER = "neoAdmin";
     public static final String PASSWORD = "password";
 
     public UserAddService( @Context AuthManager authManager,

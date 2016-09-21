@@ -58,7 +58,7 @@ public class UserAddServiceTest
         @Override
         public String getName()
         {
-            return "neo4j";
+            return "neoAdmin";
         }
     };
     private static final Principal BAD_PRINCIPLE = new Principal()
@@ -69,7 +69,7 @@ public class UserAddServiceTest
             return "bad";
         }
     };
-    private static final User NEO4J_USER = new User( "neo4j", Credential.forPassword( "neo4j" ), true );
+    private static final User NEO4J_USER = new User( "neoAdmin", Credential.forPassword( "neo4j" ), true );
     private static final User FOO_USER = new User( "foo", Credential.forPassword( "bar" ), true );
 
     @Test
